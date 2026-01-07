@@ -11,8 +11,8 @@ function convertToObject(sourceString) {
 
   return resultArr.reduce((resultObject, currentString) => {
     const [key, value] = currentString.split(':');
-    const trimmedKey = key !== null ? key.trim() : null;
-    const trimmedValue = value !== null ? value.trim() : null;
+    const trimmedKey = key != null ? key.trim() : null;
+    const trimmedValue = value != null ? value.trim() : null;
 
     if (!trimmedKey || !trimmedValue) {
       return resultObject;
