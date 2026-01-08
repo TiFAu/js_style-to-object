@@ -6,28 +6,23 @@
  * @return {object}
  */
 function convertToObject(sourceString) {
-  const declarations = sourceString.split(';');
   const initialStyles = {};
+  const declarations = sourceString
+    .split(';')
+    .filter((element) => element.includes(':'));
 
-  return declarations.reduce((resultObject, currentString) => {
+  return declarations.reduce((output, currentString) => {
     const [key, value] = currentString.split(':', 2);
     const trimmedKey = key != null ? key.trim() : null;
     const trimmedValue = value != null ? value.trim() : null;
 
     if (!trimmedKey || !trimmedValue) {
-      return resultObject;
+      return output;
     }
 
-    if (
-      (trimmedKey && trimmedValue !== undefined && trimmedValue !== null) ||
-      (trimmedValue !== undefined &&
-        trimmedValue !== null &&
-        trimmedValue !== '')
-    ) {
-      resultObject[trimmedKey] = trimmedValue;
-    }
+    output[trimmedKey] = trimmedValue;
 
-    return resultObject;
+    return output;
   }, initialStyles);
 }
 
